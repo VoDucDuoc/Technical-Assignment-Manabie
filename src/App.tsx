@@ -6,6 +6,7 @@ import SignInPage from './Pages/SigninPage/SignInPage';
 import ToDoPage from './Pages/TodoPage/ToDoPage';
 
 import './App.css';
+import PrivateRoute from './PrivateRoute';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={SignInPage}/>
-          <Route path="/todo" component={ToDoPage}/>
+          <PrivateRoute path="/todo" component={ToDoPage}/>
         </Switch>
       </BrowserRouter>
     </main>

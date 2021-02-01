@@ -1,4 +1,4 @@
-import { stringify } from "querystring";
+
 import { Todo, TodoStatus } from "../models/todo";
 import {
   AppActions,
@@ -8,6 +8,7 @@ import {
   TOGGLE_ALL_TODOS,
   UPDATE_TODO_STATUS,
   SET_TODO,
+  EDIT_CONTENT,
 } from "./actions";
 
 export interface AppState {
@@ -76,6 +77,19 @@ function reducer(state: AppState, action: AppActions): AppState {
         ...state,
         todos: [],
       };
+      case EDIT_CONTENT:
+        let newTodoTemp = action.payload;
+        let todosTemp = state.todos;
+        let editTodoTemp = todosTemp.find(todo => todo.id === newTodoTemp.todoId);
+        let editTodo: any = {...editTodoTemp, content: newTodoTemp.content};
+        let index = todosTemp.findIndex(todo => todo.id === newTodoTemp.todoId);
+        state.todos[index] = editTodo;
+        localStorage.setItem("todos", JSON.stringify(state.todos));
+        return {
+          ...state,
+          todos: state.todos
+        }
+        
     default:
       return state;
   }

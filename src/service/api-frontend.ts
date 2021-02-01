@@ -31,6 +31,7 @@ class ApiFrontend extends IAPI {
 
     return [];
   }
+  
 }
 
 export default new ApiFrontend();
